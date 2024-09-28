@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Carly</string>
+    <string name="app_log_tag">carly_app</string>
+    <string name="search_for_brand">Search for brand …</string>
+    <string name="search_for_series">Search for series …</string>
+    <string name="search_for_build_year">Search for build year …</string>
+    <string name="search_for_fuel_type">Search for fuel type …</string>
+    <string name="car_selection">Car selection</string>
+</resources>

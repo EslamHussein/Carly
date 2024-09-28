@@ -1,0 +1,508 @@
+{
+  "car_brands": [
+    {
+      "brand_id": 1,
+      "brand_name": "Audi",
+      "brand_series": [
+        {
+          "series_name": "A1",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 11
+        },
+        {
+          "series_name": "A3",
+          "minimum_supported_year": 1996,
+          "maximum_supported_year": 2023,
+          "series_id": 12
+        },
+        {
+          "series_name": "A4",
+          "minimum_supported_year": 1994,
+          "maximum_supported_year": 2023,
+          "series_id": 13
+        },
+        {
+          "series_name": "A5",
+          "minimum_supported_year": 2007,
+          "maximum_supported_year": 2023,
+          "series_id": 14
+        },
+        {
+          "series_name": "A6",
+          "minimum_supported_year": 1994,
+          "maximum_supported_year": 2023,
+          "series_id": 15
+        },
+        {
+          "series_name": "A7",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 16
+        },
+        {
+          "series_name": "A8",
+          "minimum_supported_year": 1994,
+          "maximum_supported_year": 2023,
+          "series_id": 17
+        },
+        {
+          "series_name": "Q2",
+          "minimum_supported_year": 2016,
+          "maximum_supported_year": 2023,
+          "series_id": 18
+        },
+        {
+          "series_name": "Q3",
+          "minimum_supported_year": 2011,
+          "maximum_supported_year": 2023,
+          "series_id": 19
+        },
+        {
+          "series_name": "Q4",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 110
+        },
+        {
+          "series_name": "Q5",
+          "minimum_supported_year": 2008,
+          "maximum_supported_year": 2023,
+          "series_id": 111
+        },
+        {
+          "series_name": "Q7",
+          "minimum_supported_year": 2005,
+          "maximum_supported_year": 2023,
+          "series_id": 112
+        },
+        {
+          "series_name": "Q8",
+          "minimum_supported_year": 2018,
+          "maximum_supported_year": 2023,
+          "series_id": 113
+        },
+        {
+          "series_name": "TT",
+          "minimum_supported_year": 1998,
+          "maximum_supported_year": 2023,
+          "series_id": 114
+        },
+        {
+          "series_name": "R8",
+          "minimum_supported_year": 2006,
+          "maximum_supported_year": 2023,
+          "series_id": 115
+        },
+        {
+          "series_name": "e-Tron",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 116
+        }
+      ],
+      "supported_features": [
+        {
+          "feature_id": 1,
+          "feature_name": "Diagnostics"
+        },
+        {
+          "feature_id": 2,
+          "feature_name": "Live Data"
+        },
+        {
+          "feature_id": 3,
+          "feature_name": "Battery Check"
+        }
+      ]
+    },
+    {
+      "brand_id": 2,
+      "brand_name": "BMW",
+      "brand_series": [
+        {
+          "series_name": "1 Series",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 21
+        },
+        {
+          "series_name": "2 Series",
+          "minimum_supported_year": 2004,
+          "maximum_supported_year": 2023,
+          "series_id": 22
+        },
+        {
+          "series_name": "3 Series",
+          "minimum_supported_year": 2005,
+          "maximum_supported_year": 2023,
+          "series_id": 3
+        },
+        {
+          "series_name": "4 Series",
+          "minimum_supported_year": 2014,
+          "maximum_supported_year": 2023,
+          "series_id": 24
+        },
+        {
+          "series_name": "5 Series",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 25
+        },
+        {
+          "series_name": "6 Series",
+          "minimum_supported_year": 2011,
+          "maximum_supported_year": 2023,
+          "series_id": 26
+        },
+        {
+          "series_name": "7 Series",
+          "minimum_supported_year": 2009,
+          "maximum_supported_year": 2023,
+          "series_id": 27
+        },
+        {
+          "series_name": "8 Series",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 28
+        },
+        {
+          "series_name": "X1 Series",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 29
+        },
+        {
+          "series_name": "X2 Series",
+          "minimum_supported_year": 2018,
+          "maximum_supported_year": 2023,
+          "series_id": 210
+        },
+        {
+          "series_name": "X3 Series",
+          "minimum_supported_year": 2004,
+          "maximum_supported_year": 2023,
+          "series_id": 211
+        },
+        {
+          "series_name": "X4 Series",
+          "minimum_supported_year": 2014,
+          "maximum_supported_year": 2023,
+          "series_id": 212
+        },
+        {
+          "series_name": "X5 Series",
+          "minimum_supported_year": 2000,
+          "maximum_supported_year": 2023,
+          "series_id": 213
+        },
+        {
+          "series_name": "X6 Series",
+          "minimum_supported_year": 2008,
+          "maximum_supported_year": 2023,
+          "series_id": 214
+        },
+        {
+          "series_name": "X7 Series",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 215
+        },
+        {
+          "series_name": "Z4",
+          "minimum_supported_year": 2002,
+          "maximum_supported_year": 2023,
+          "series_id": 216
+        }
+      ],
+      "supported_features": [
+        {
+          "feature_id": 1,
+          "feature_name": "Diagnostics"
+        },
+        {
+          "feature_id": 2,
+          "feature_name": "Live Data"
+        },
+        {
+          "feature_id": 3,
+          "feature_name": "Battery Check"
+        },
+        {
+          "feature_id": 4,
+          "feature_name": "Car Check"
+        }
+      ]
+    },
+    {
+      "brand_id": 3,
+      "brand_name": "Mercedes",
+      "brand_series": [
+        {
+          "series_name": "A Class",
+          "minimum_supported_year": 1997,
+          "maximum_supported_year": 2023,
+          "series_id": 31
+        },
+        {
+          "series_name": "B Class",
+          "minimum_supported_year": 2005,
+          "maximum_supported_year": 2023,
+          "series_id": 32
+        },
+        {
+          "series_name": "C Class",
+          "minimum_supported_year": 1993,
+          "maximum_supported_year": 2023,
+          "series_id": 33
+        },
+        {
+          "series_name": "CLA Class",
+          "minimum_supported_year": 2013,
+          "maximum_supported_year": 2023,
+          "series_id": 34
+        },
+        {
+          "series_name": "CLS Class",
+          "minimum_supported_year": 2004,
+          "maximum_supported_year": 2023,
+          "series_id": 35
+        },
+        {
+          "series_name": "E Class",
+          "minimum_supported_year": 1993,
+          "maximum_supported_year": 2023,
+          "series_id": 36
+        },
+        {
+          "series_name": "G-Class",
+          "minimum_supported_year": 1979,
+          "maximum_supported_year": 2023,
+          "series_id": 37
+        },
+        {
+          "series_name": "GLA Class",
+          "minimum_supported_year": 2014,
+          "maximum_supported_year": 2023,
+          "series_id": 38
+        },
+        {
+          "series_name": "GLB Class",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 39
+        },
+        {
+          "series_name": "GLC Class",
+          "minimum_supported_year": 2016,
+          "maximum_supported_year": 2023,
+          "series_id": 310
+        },
+        {
+          "series_name": "GLE Class",
+          "minimum_supported_year": 1997,
+          "maximum_supported_year": 2023,
+          "series_id": 311
+        },
+        {
+          "series_name": "GLS Class",
+          "minimum_supported_year": 2006,
+          "maximum_supported_year": 2023,
+          "series_id": 312
+        },
+        {
+          "series_name": "S Class",
+          "minimum_supported_year": 1972,
+          "maximum_supported_year": 2023,
+          "series_id": 313
+        },
+        {
+          "series_name": "SL Class",
+          "minimum_supported_year": 1954,
+          "maximum_supported_year": 2023,
+          "series_id": 314
+        },
+        {
+          "series_name": "SLC Class",
+          "minimum_supported_year": 1996,
+          "maximum_supported_year": 2023,
+          "series_id": 315
+        },
+        {
+          "series_name": "GLE Coupe",
+          "minimum_supported_year": 2015,
+          "maximum_supported_year": 2023,
+          "series_id": 316
+        },
+        {
+          "series_name": "GLC Coupe",
+          "minimum_supported_year": 2016,
+          "maximum_supported_year": 2023,
+          "series_id": 317
+        },
+        {
+          "series_name": "GLS Coupe",
+          "minimum_supported_year": 2015,
+          "maximum_supported_year": 2023,
+          "series_id": 318
+        },
+        {
+          "series_name": "AMG GT",
+          "minimum_supported_year": 2015,
+          "maximum_supported_year": 2023,
+          "series_id": 319
+        },
+        {
+          "series_name": "EQC",
+          "minimum_supported_year": 2019,
+          "maximum_supported_year": 2023,
+          "series_id": 320
+        }
+      ],
+      "supported_features": [
+        {
+          "feature_id": 1,
+          "feature_name": "Diagnostics"
+        },
+        {
+          "feature_id": 3,
+          "feature_name": "Battery Check"
+        },
+        {
+          "feature_id": 4,
+          "feature_name": "Car Check"
+        }
+      ]
+    },
+    {
+      "brand_id": 4,
+      "brand_name": "Volkswagen",
+      "brand_series": [
+        {
+          "series_name": "Polo",
+          "minimum_supported_year": 1975,
+          "maximum_supported_year": 2023,
+          "series_id": 41
+        },
+        {
+          "series_name": "Golf",
+          "minimum_supported_year": 1974,
+          "maximum_supported_year": 2023,
+          "series_id": 42
+        },
+        {
+          "series_name": "Passat",
+          "minimum_supported_year": 1973,
+          "maximum_supported_year": 2023,
+          "series_id": 43
+        },
+        {
+          "series_name": "Arteon",
+          "minimum_supported_year": 2017,
+          "maximum_supported_year": 2023,
+          "series_id": 44
+        },
+        {
+          "series_name": "Tiguan",
+          "minimum_supported_year": 2007,
+          "maximum_supported_year": 2023,
+          "series_id": 45
+        },
+        {
+          "series_name": "T-Roc",
+          "minimum_supported_year": 2017,
+          "maximum_supported_year": 2023,
+          "series_id": 46
+        },
+        {
+          "series_name": "Touareg",
+          "minimum_supported_year": 2002,
+          "maximum_supported_year": 2023,
+          "series_id": 47
+        },
+        {
+          "series_name": "ID 3",
+          "minimum_supported_year": 2020,
+          "maximum_supported_year": 2023,
+          "series_id": 48
+        },
+        {
+          "series_name": "ID 4",
+          "minimum_supported_year": 2020,
+          "maximum_supported_year": 2023,
+          "series_id": 49
+        },
+        {
+          "series_name": "ID Buzz",
+          "minimum_supported_year": 2022,
+          "maximum_supported_year": 2023,
+          "series_id": 410
+        },
+        {
+          "series_name": "Amarok",
+          "minimum_supported_year": 2010,
+          "maximum_supported_year": 2023,
+          "series_id": 411
+        },
+        {
+          "series_name": "Caddy",
+          "minimum_supported_year": 1980,
+          "maximum_supported_year": 2023,
+          "series_id": 412
+        },
+        {
+          "series_name": "Transporter",
+          "minimum_supported_year": 1950,
+          "maximum_supported_year": 2023,
+          "series_id": 413
+        },
+        {
+          "series_name": "California",
+          "minimum_supported_year": 1988,
+          "maximum_supported_year": 2023,
+          "series_id": 414
+        },
+        {
+          "series_name": "Caravelle",
+          "minimum_supported_year": 1990,
+          "maximum_supported_year": 2023,
+          "series_id": 415
+        }
+      ],
+      "supported_features": [
+        {
+          "feature_id": 1,
+          "feature_name": "Diagnostics"
+        },
+        {
+          "feature_id": 3,
+          "feature_name": "Battery Check"
+        }
+      ]
+    }
+  ],
+  "fuel_types": [
+    {
+      "fuel_type_id": 1,
+      "fuel_type_name": "Gasoline"
+    },
+    {
+      "fuel_type_id": 2,
+      "fuel_type_name": "Diesel"
+    },
+    {
+      "fuel_type_id": 3,
+      "fuel_type_name": "Hybrid"
+    },
+    {
+      "fuel_type_id": 4,
+      "fuel_type_name": "Electric"
+    },
+    {
+      "fuel_type_id": 5,
+      "fuel_type_name": "Other"
+    }
+  ]
+}
