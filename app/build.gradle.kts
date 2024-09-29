@@ -3,9 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0" // Add this line
+    alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
-
 
 }
 
@@ -81,15 +80,12 @@ dependencies {
     implementation(libs.room)
     annotationProcessor(libs.roomprocessor)
     ksp(libs.roomprocessor)
-
-    debugImplementation(libs.bundles.ui.debug)
-    implementation(libs.kotlinx.serialization.json) 
-
     implementation (libs.androidx.room.ktx)
+
+    implementation(libs.kotlinx.serialization.json)
 
     implementation (libs.androidx.datastore.preferences)
 
-    implementation (libs.androidx.constraintlayout.compose)
-
+    debugImplementation(libs.bundles.ui.debug)
 
 }

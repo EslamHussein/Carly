@@ -76,6 +76,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 
 [bundles]
@@ -93,6 +94,7 @@ compose = [
     'androidx-material3',
     'androidx-compose-navigation',
     'androidx-compose-material-icons',
+    'androidx-constraintlayout-compose',
 ]
 compose-testing = [
     'coil-test'
