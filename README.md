@@ -11,6 +11,27 @@ features like Diagnostics, Live Data, and Battery Check.
 
 ---
 
+## Screenshots
+
+<table>
+    <tr>
+    <td><img src="/screenshots/Screenshot_dashboard_add_new_car.png" width="200"/></td>
+    <td><img src="/screenshots/Screenshot_dashboard_with_selected_car.png" width="200"/></td>
+    <td><img src="/screenshots/Screenshot_your_cars.png" width="200"/></td>
+
+  </tr>
+  <tr>
+    <td><img src="/screenshots/Screenshot_add_new_car_brand_step.png" width="200"/></td>
+    <td><img src="/screenshots/Screenshot_add_new_car_series_step.png" width="200"/></td>
+    <td><img src="/screenshots/Screenshot_add_new_car_build_year_step.png" width="200"/></td>
+    <td><img src="/screenshots/Screenshot_add_new_car_fuel_step.png" width="200"/></td>
+  </tr>
+
+ 
+</table>
+
+---
+
 ## Features Implemented
 
 ### 1. Vehicle Creation Flow
@@ -82,10 +103,6 @@ database entities and data sources, as these are used in multiple parts of the a
 
 ---
 
-## Screenshots
 
-![alt text](/screenshots/Screenshot_add_new_car_brand_step.png)
-
----
 
 ## Setup Instructions
