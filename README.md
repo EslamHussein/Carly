@@ -1,4 +1,4 @@
-![Carly](~/screenshots/carly_logo.png)
+![Carly](/screenshots/carly_logo.png)
 
 # Vehicle Management App
 
@@ -78,13 +78,13 @@ database entities and data sources, as these are used in multiple parts of the a
 
 ## DB Digram
 
-![alt text](~/screenshots/carly_db_diagram.png)
+![alt text](/screenshots/carly_db_diagram.png)
 
 ---
 
 ## Screenshots
 
-![alt text](~/screenshots/vehicle_management_app.png)
+![alt text](/screenshots/Screenshot_add_new_car_brand_step.png)
 
 ---
 
