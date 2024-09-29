@@ -26,10 +26,10 @@ abstract class MviViewModel<STATE : Any, SIDE_EFFECT : Any, ACTION : Any>(
     }
 
     protected fun intent(
-        transform: suspend MviViewModel<STATE, SIDE_EFFECT, ACTION>.(currentState: STATE) -> Unit
+        transform: suspend MviViewModel<STATE, SIDE_EFFECT, ACTION>.() -> Unit
     ): Job {
         return viewModelScope.launch {
-            transform(state.value)
+            transform()
         }
     }
 

@@ -1,5 +1,6 @@
 package com.carly.features.addcar.ui
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,9 +25,13 @@ import com.carly.R
 import com.carly.features.addcar.ui.appbar.CarlyAppBar
 import com.carly.features.addcar.ui.appbar.SearchBar
 import com.carly.features.addcar.vm.AddCarAction
+import com.carly.features.addcar.vm.AddCarSideEffect
 import com.carly.features.addcar.vm.AddCarState
 import com.carly.features.addcar.vm.AddCarViewModel
+import com.carly.features.addcar.vm.SelectionItem
+import com.carly.features.addcar.vm.UserCar
 import com.carly.features.addcar.vm.getSearchHint
+import com.carly.features.navigation.DashboardDestination
 import com.carly.ui.theme.CarlyTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -43,24 +48,31 @@ fun AddNewCarScreen(
 
     LaunchedEffect(sideEffect) {
         when (sideEffect) {
-            com.carly.features.addcar.vm.AddCarSideEffect.NavigateBack -> {
+            AddCarSideEffect.NavigateBack -> {
                 navController.popBackStack()
             }
 
             null -> {}
-        }
+            AddCarSideEffect.NativeToHome -> {
+                navController.navigate(DashboardDestination) {
+                    popUpTo(DashboardDestination) {
+                        inclusive = true
+                    }
+                }
+            }
 
+            AddCarSideEffect.ShowError -> {
+                // TODO show error msg
+            }
+        }
     }
-    // Collect side effects in LaunchedEffect
     LaunchedEffect(key1 = Unit) {
         viewModel.sendAction(AddCarAction.LoadData(state.currentStep))
     }
-    AddNewCarScreen(
-        modifier = modifier,
-        state = state,
-        onAction = { action ->
-            viewModel.sendAction(action)
-        }
+    BackHandler { viewModel.sendAction(AddCarAction.BackPressed) }
+    AddNewCarScreen(modifier = modifier, state = state, onAction = { action ->
+        viewModel.sendAction(action)
+    }
 
     )
 }
@@ -68,9 +80,7 @@ fun AddNewCarScreen(
 
 @Composable
 fun AddNewCarScreen(
-    modifier: Modifier = Modifier,
-    state: AddCarState,
-    onAction: (AddCarAction) -> Unit
+    modifier: Modifier = Modifier, state: AddCarState, onAction: (AddCarAction) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -78,7 +88,7 @@ fun AddNewCarScreen(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xff3b404a), // Start color (top)
+                        Color(0xff3a3f49), // Start color (top)
                         Color(0xFF25272d)  // End color (bottom)
                     )
                 )
@@ -88,32 +98,26 @@ fun AddNewCarScreen(
             title = stringResource(R.string.car_selection),
             onBackClick = { onAction(AddCarAction.BackPressed) }
         )
-        // TODO search bar could be in a better design
-        SearchBar(
-            modifier = Modifier.padding(horizontal = 18.dp),
+        SearchBar(modifier = Modifier.padding(horizontal = 18.dp),
             searchQuery = state.searchQuery,
             placeholderText = state.currentStep.getSearchHint(),
             onSearchQueryChanged = { query ->
                 onAction(AddCarAction.SearchQueryChanged(query))
-            }
-        )
+            })
         Text(
-            text = state.newCar.toFormattedString(),//TODO check recomposition
-            style = MaterialTheme.typography.bodyMedium.copy(color = Color(0xFFFFA000)), // Orange color
-            modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 8.dp)
+            text = state.newCar.toFormattedString(),
+            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.secondary), // Orange color
+            modifier = Modifier.padding(16.dp),
         )
 
+        HorizontalDivider(color = Color.Gray, thickness = 0.5.dp)
 
-        HorizontalDivider(color = Color.Gray, thickness = 0.5.dp) // Line separator
-
-        // List of car series
         LazyColumn {
 
             items(state.filtered, key = { it.hashCode() }) { item ->
-                CarSelectionListItem(
-                    item = item,
+                CarSelectionListItem(item = item,
                     onClick = { onAction(AddCarAction.OnItemSelected(item)) })
-                HorizontalDivider(color = Color.Gray, thickness = 0.5.dp) // Line separator
+                HorizontalDivider(color = Color.Gray, thickness = 0.5.dp)
             }
         }
     }
@@ -124,6 +128,8 @@ fun AddNewCarScreen(
 @Composable
 fun CarSelectionScreenPreview() {
     CarlyTheme {
-        AddNewCarScreen(state = AddCarState(), onAction = {})
+        AddNewCarScreen(
+            state = AddCarState(newCar = UserCar(brand = SelectionItem(1, "BMW"))),
+            onAction = {})
     }
 }

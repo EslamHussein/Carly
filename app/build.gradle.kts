@@ -83,9 +83,11 @@ dependencies {
     ksp(libs.roomprocessor)
 
     debugImplementation(libs.bundles.ui.debug)
-    implementation(libs.kotlinx.serialization.json) // Add this line
+    implementation(libs.kotlinx.serialization.json) 
 
-    implementation (libs.androidx.room.ktx) // Or the latest stable version
+    implementation (libs.androidx.room.ktx)
+
+    implementation (libs.androidx.datastore.preferences)
 
 
 

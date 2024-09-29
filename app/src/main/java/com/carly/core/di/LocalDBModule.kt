@@ -8,6 +8,7 @@ import com.carly.core.data.local.dao.CarBrandFeatureCrossRefDao
 import com.carly.core.data.local.dao.FeatureDao
 import com.carly.core.data.local.dao.FuelTypeDao
 import com.carly.core.data.local.dao.SeriesDao
+import com.carly.core.data.local.dao.UserCarDao
 import com.carly.core.data.local.db.CarlyDatabase
 import org.koin.dsl.module
 
@@ -24,6 +25,7 @@ val localDBModule = module {
     single<FeatureDao> { get<CarlyDatabase>().featureDao() }
     single<CarBrandFeatureCrossRefDao> { get<CarlyDatabase>().carBrandFeatureCrossRefDao() }
     single<FuelTypeDao> { get<CarlyDatabase>().fuelTypeDao() }
+    single<UserCarDao> { get<CarlyDatabase>().userCarDaoDao() }
 
-    single<CarsLocalDataSource> { CarsLocalDataSourceImpl(get(), get(), get(), get(), get()) }
+    single<CarsLocalDataSource> { CarsLocalDataSourceImpl(get(), get(), get(), get(), get(),get()) }
 }

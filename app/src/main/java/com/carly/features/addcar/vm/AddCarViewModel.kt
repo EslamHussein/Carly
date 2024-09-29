@@ -1,11 +1,17 @@
 package com.carly.features.addcar.vm
 
 import com.carly.core.vm.MviViewModel
+import com.carly.features.addcar.domain.AddNewCarUseCase
 import com.carly.features.addcar.domain.FetchStepDataUseCaseUseCase
 import kotlinx.coroutines.flow.collectLatest
 
-
-class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseCaseUseCase) :
+/**
+ * ViewModel for AddCar feature
+ */
+class AddCarViewModel(
+    private val fetchStepDataUseCaseUseCase: FetchStepDataUseCaseUseCase,
+    private val addNewCarUseCase: AddNewCarUseCase
+) :
     MviViewModel<AddCarState, AddCarSideEffect, AddCarAction>(AddCarState()) {
 
     override fun sendAction(action: AddCarAction) {
@@ -15,7 +21,7 @@ class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseC
                 reduce {
                     copy(
                         searchQuery = action.query,
-                        filtered = state.value.currentStepList.filter {
+                        filtered = currentStepList.filter {
                             it.name.contains(action.query, ignoreCase = true)
                         }
                     )
@@ -23,31 +29,7 @@ class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseC
             }
 
             is AddCarAction.OnItemSelected -> {
-                reduce {
-                    copy(
-                        searchQuery = "",
-                        currentStep = getNextStep(),
-                        newCar = when (state.value.currentStep) {
-                            Step.SelectBrand -> state.value.newCar.copy(
-                                brand = action.item
-                            )
-
-                            Step.SelectSeries -> state.value.newCar.copy(
-                                series = action.item
-                            )
-
-                            Step.SelectBuildYear -> state.value.newCar.copy(
-                                year = action.item
-                            )
-
-                            Step.SelectFuelType -> state.value.newCar.copy(
-                                fuelType = action.item
-                            )
-                        }
-                    )
-                }.also {
-                    sendAction(AddCarAction.LoadData(state.value.currentStep))
-                }
+                handelOnItemSelected(action)
             }
 
             is AddCarAction.LoadData -> {
@@ -64,24 +46,65 @@ class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseC
 
     }
 
-    private fun getNextStep() = when (state.value.currentStep) {
+    private fun handelOnItemSelected(action: AddCarAction.OnItemSelected) = intent {
+        reduce {
+            copy(
+                searchQuery = "",
+                newCar = when (currentStep) {
+                    Step.SelectBrand -> newCar.copy(
+                        brand = action.item
+                    )
+
+                    Step.SelectSeries -> newCar.copy(
+                        series = action.item
+                    )
+
+                    Step.SelectBuildYear -> newCar.copy(
+                        year = action.item
+                    )
+
+                    Step.SelectFuelType -> newCar.copy(
+                        fuelType = action.item
+                    )
+                }
+            )
+        }.also {
+
+            if (state.value.currentStep != Step.SelectFuelType) {
+                sendAction(AddCarAction.LoadData(getNextStep(state.value.currentStep)))
+            } else {
+                addNewCar(state.value.newCar)
+            }
+        }
+    }
+
+    private fun addNewCar(newCar: UserCar) = intent {
+
+        addNewCarUseCase(newCar)
+            .onSuccess {
+                postSideEffect(AddCarSideEffect.NativeToHome)
+            }.onFailure {
+                postSideEffect(AddCarSideEffect.ShowError)
+            }
+    }
+
+    private fun getNextStep(currentStep: Step) = when (currentStep) {
         Step.SelectBrand -> Step.SelectSeries
         Step.SelectSeries -> Step.SelectBuildYear
         Step.SelectBuildYear -> Step.SelectFuelType
-        else -> state.value.currentStep
+        else -> currentStep
     }
 
-    private fun handleBackPressed() = intent { state ->
-        if (state.currentStep == Step.SelectBrand) {
-            // Trigger back navigation instead of going to the previous step
+    private fun handleBackPressed() = intent {
+        if (state.value.currentStep == Step.SelectBrand) {
             postSideEffect(AddCarSideEffect.NavigateBack)
         } else {
             reduce {
-                val previousStep = getPreviousStep(state.currentStep)
+                val previousStep = getPreviousStep(state.value.currentStep)
                 copy(
                     currentStep = previousStep,
                     searchQuery = "",
-                    newCar = resetNewCar(state.newCar, previousStep)
+                    newCar = resetNewCar(state.value.newCar, previousStep)
                 )
             }
         }
@@ -107,7 +130,9 @@ class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseC
                 fuelType = null
             )
 
-            else -> currentCar
+            Step.SelectFuelType -> currentCar.copy(
+                fuelType = null
+            )
         }
     }
 
@@ -121,13 +146,14 @@ class AddCarViewModel(private val fetchStepDataUseCaseUseCase: FetchStepDataUseC
     private fun loadData(
         currentStep: Step,
     ) {
-        intent { state ->
+        intent {
+            reduce { copy(currentStep = currentStep) }
             fetchStepDataUseCaseUseCase(
                 FetchStepDataUseCaseUseCase.Params.create(
                     currentStep = currentStep,
-                    brand = state.newCar.brand,
-                    series = state.newCar.series,
-                    year = state.newCar.year
+                    brand = state.value.newCar.brand,
+                    series = state.value.newCar.series,
+                    year = state.value.newCar.year
                 )
             ).collectLatest {
                 reduce {

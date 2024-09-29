@@ -64,13 +64,14 @@ private fun DashboardScreen(
                 AddNewCar(onAddCarClick = onAddCarCLick)
             }
 
-            DashboardState.CarSelected -> {
-                DashboardWithSelectedCar()
-            }
 
             DashboardState.Idle -> TODO()
             DashboardState.Loading -> {
                 CircularProgressIndicator()
+            }
+
+            is DashboardState.CarSelected -> {
+                DashboardWithSelectedCar()
             }
         }
     }

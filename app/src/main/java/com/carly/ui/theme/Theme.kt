@@ -15,7 +15,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = YellowAccent, // Accent color (secondary color)
     onSecondary = FontLight, // Font color on secondary
 
-    background = BackgroundDark, // Background color (light)
+    background = BackgroundDark, // Background color (dark)
     onBackground = FontLight, // Font color on background (dark)
 
     surface = FontLight, // Surface color (similar to background)

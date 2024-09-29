@@ -1,5 +1,6 @@
 package com.carly.core.data.local
 
+import com.carly.core.asFailure
 import com.carly.core.data.json.models.Brand
 import com.carly.core.data.json.models.FuelType
 import com.carly.core.data.local.dao.BrandDao
@@ -7,11 +8,13 @@ import com.carly.core.data.local.dao.CarBrandFeatureCrossRefDao
 import com.carly.core.data.local.dao.FeatureDao
 import com.carly.core.data.local.dao.FuelTypeDao
 import com.carly.core.data.local.dao.SeriesDao
+import com.carly.core.data.local.dao.UserCarDao
 import com.carly.core.data.local.entities.CarBrandEntity
 import com.carly.core.data.local.entities.CarBrandFeatureCrossRef
 import com.carly.core.data.local.entities.FuelTypeEntity
 import com.carly.core.data.local.entities.SeriesEntity
 import com.carly.core.data.local.entities.SupportedFeatureEntity
+import com.carly.core.data.local.entities.UserCarEntity
 import kotlinx.coroutines.flow.Flow
 
 class CarsLocalDataSourceImpl(
@@ -19,7 +22,8 @@ class CarsLocalDataSourceImpl(
     private val seriesDao: SeriesDao,
     private val featureDao: FeatureDao,
     private val fuelTypeDao: FuelTypeDao,
-    private val carBrandFeatureCrossRefDao: CarBrandFeatureCrossRefDao
+    private val carBrandFeatureCrossRefDao: CarBrandFeatureCrossRefDao,
+    private val userCarDao: UserCarDao
 ) : CarsLocalDataSource {
     override suspend fun isDBEmpty(): Boolean {
         return carBrandDao.getCarBrandCount() == 0
@@ -87,11 +91,27 @@ class CarsLocalDataSourceImpl(
     }
 
     override suspend fun addFuelTypes(fuelTypes: List<FuelType>) {
-        fuelTypeDao.insertFuel( fuelTypes.map {
+        fuelTypeDao.insertFuel(fuelTypes.map {
             FuelTypeEntity(
                 fuelTypeId = it.fuelTypeId,
                 fuelTypeName = it.fuelTypeName
             )
         })
+    }
+
+    override suspend fun addUserCar(car: UserCarEntity): Result<Long> {
+        return runCatching {
+            userCarDao.insertCar(car)
+        }.onFailure {
+            it.asFailure<Throwable>()
+        }
+    }
+
+    override fun getAllUserCars(): Flow<List<UserCarEntity>> {
+        return userCarDao.getAllCars()
+    }
+
+    override suspend fun getUserCarById(carId: Long): UserCarEntity? {
+        return userCarDao.getUserCarById(carId)
     }
 }

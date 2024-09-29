@@ -2,6 +2,7 @@ package com.carly
 
 import android.app.Application
 import com.carly.core.di.coroutinesModule
+import com.carly.core.di.dataStoreModule
 import com.carly.core.di.jsonModule
 import com.carly.core.di.localDBModule
 import com.carly.features.addcar.di.addCarModule
@@ -23,7 +24,14 @@ class CarlyApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@CarlyApp)
-            modules(coroutinesModule, jsonModule, localDBModule, dashboardModule, addCarModule)
+            modules(
+                coroutinesModule,
+                jsonModule,
+                localDBModule,
+                dashboardModule,
+                addCarModule,
+                dataStoreModule
+            )
         }
     }
 

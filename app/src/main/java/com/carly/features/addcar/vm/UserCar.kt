@@ -9,10 +9,10 @@ data class UserCar(
 ) {
     fun toFormattedString(): String {
         return listOfNotNull(
-            brand?.takeIf { it.name.isNotEmpty() },
-            series?.takeIf { it.name.isNotEmpty() },
-            year?.takeIf { it.name.isNotEmpty() },
-            fuelType?.takeIf { it.name.isNotEmpty() }
+            brand?.name?.takeIf { it.isNotEmpty() },
+            series?.name?.takeIf { it.isNotEmpty() },
+            year?.name?.takeIf { it.isNotEmpty() },
+            fuelType?.name?.takeIf { it.isNotEmpty() }
         ).joinToString(separator = ", ")
     }
 }
