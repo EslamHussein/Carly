@@ -1,5 +1,6 @@
 package com.carly.features.mycars.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +33,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MyCarsScreen(navController: NavController, viewModel: MyCarsViewModel = koinViewModel()) {
-
+    val context = LocalContext.current
     LaunchedEffect(Unit) {
         viewModel.sendAction(MyCarsAction.LoadCars)
     }
@@ -39,7 +41,13 @@ fun MyCarsScreen(navController: NavController, viewModel: MyCarsViewModel = koin
         viewModel.sideEffect.collect { sideEffect ->
             when (sideEffect) {
                 MyCarsSideEffect.NavigateToAddNewCar -> navController.navigate(AddNewCarDestination)
-                MyCarsSideEffect.ShowError -> TODO()
+                MyCarsSideEffect.ShowError -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
+                    ).show()
+                }
+
                 MyCarsSideEffect.NavigateToBack -> navController.popBackStack()
             }
         }

@@ -14,7 +14,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -33,6 +32,7 @@ import com.carly.features.addcar.vm.AddCarState
 import com.carly.features.addcar.vm.AddCarViewModel
 import com.carly.features.addcar.vm.CreateUserCar
 import com.carly.features.addcar.vm.SelectionItem
+import com.carly.features.addcar.vm.Step
 import com.carly.features.addcar.vm.getSearchHint
 import com.carly.features.navigation.DashboardDestination
 import com.carly.ui.theme.CarlyTheme
@@ -47,32 +47,35 @@ fun AddNewCarScreen(
 
     val state = viewModel.state.collectAsStateWithLifecycle().value
 
-    val sideEffect = viewModel.sideEffect.collectAsState(null).value // Observe side effects
-
     val context = LocalContext.current
-    LaunchedEffect(sideEffect) {
-        when (sideEffect) {
-            AddCarSideEffect.NavigateBack -> {
-                navController.popBackStack()
-            }
 
-            null -> {}
-            AddCarSideEffect.NativeToHome -> {
-                navController.navigate(DashboardDestination) {
-                    popUpTo(DashboardDestination) {
-                        inclusive = true
+    LaunchedEffect(Unit) {
+
+        viewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
+                AddCarSideEffect.NavigateBack -> {
+                    navController.popBackStack()
+                }
+
+                AddCarSideEffect.NativeToHome -> {
+                    navController.navigate(DashboardDestination) {
+                        popUpTo(DashboardDestination) {
+                            inclusive = true
+                        }
                     }
                 }
-            }
 
-            AddCarSideEffect.ShowError -> {
+                AddCarSideEffect.ShowError -> {
 
-                Toast.makeText(
-                    context,
-                    context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
-                ).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
+                    ).show()
+                }
+
             }
         }
+
     }
     LaunchedEffect(key1 = Unit) {
         viewModel.sendAction(AddCarAction.LoadData(state.currentStep))
@@ -113,7 +116,8 @@ fun AddNewCarScreen(
             })
         Text(
             text = state.newCar.toFormattedString(),
-            style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.secondary), // Orange color
+            style = MaterialTheme.typography.bodyMedium
+                .copy(color = MaterialTheme.colorScheme.secondary),
             modifier = Modifier.padding(16.dp),
         )
 

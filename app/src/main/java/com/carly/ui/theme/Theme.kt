@@ -35,7 +35,6 @@ private val LightColorScheme = lightColorScheme(
 fun CarlyTheme(
     content: @Composable () -> Unit
 ) {
-    // TODO apply dark theme based on system settings
 
     MaterialTheme(
         colorScheme = LightColorScheme,

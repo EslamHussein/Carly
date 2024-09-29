@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data object DashboardDestination
 
 @Serializable
-data object AddNewCarDestination
+data object MyCarsDestination
 
 @Serializable
-data object MyCarsDestination
+data object AddNewCarDestination

@@ -1,5 +1,6 @@
 package com.carly.features.dashboard.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,8 +41,8 @@ fun DashboardScreen(
     navController: NavController,
     viewModel: DashboardViewModel = koinViewModel()
 ) {
+    val context = LocalContext.current
     LaunchedEffect(Unit) { viewModel.sendAction(DashboardAction.LoadInitData) }
-
 
     LaunchedEffect(Unit) {
 
@@ -50,10 +52,14 @@ fun DashboardScreen(
                     navController.navigate(AddNewCarDestination)
 
                 DashboardSideEffect.NavigateToCarList -> navController.navigate(MyCarsDestination)
-                DashboardSideEffect.ShowError -> TODO()
+                DashboardSideEffect.ShowError -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
-
 
     }
     DashboardScreen(
