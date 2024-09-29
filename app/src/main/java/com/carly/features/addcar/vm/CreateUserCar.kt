@@ -1,7 +1,7 @@
 package com.carly.features.addcar.vm
 
 
-data class UserCar(
+data class CreateUserCar(
     val brand: SelectionItem? = null,
     val series: SelectionItem? = null,
     val year: SelectionItem? = null,

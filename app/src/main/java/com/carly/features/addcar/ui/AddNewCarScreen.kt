@@ -4,10 +4,11 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,14 +23,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.carly.R
+import com.carly.core.ui.ListItemDivider
 import com.carly.features.addcar.ui.appbar.CarlyAppBar
 import com.carly.features.addcar.ui.appbar.SearchBar
 import com.carly.features.addcar.vm.AddCarAction
 import com.carly.features.addcar.vm.AddCarSideEffect
 import com.carly.features.addcar.vm.AddCarState
 import com.carly.features.addcar.vm.AddCarViewModel
+import com.carly.features.addcar.vm.CreateUserCar
 import com.carly.features.addcar.vm.SelectionItem
-import com.carly.features.addcar.vm.UserCar
 import com.carly.features.addcar.vm.getSearchHint
 import com.carly.features.navigation.DashboardDestination
 import com.carly.ui.theme.CarlyTheme
@@ -70,10 +72,10 @@ fun AddNewCarScreen(
         viewModel.sendAction(AddCarAction.LoadData(state.currentStep))
     }
     BackHandler { viewModel.sendAction(AddCarAction.BackPressed) }
-    AddNewCarScreen(modifier = modifier, state = state, onAction = { action ->
-        viewModel.sendAction(action)
-    }
-
+    AddNewCarScreen(
+        modifier = modifier, state = state, onAction = { action ->
+            viewModel.sendAction(action)
+        }
     )
 }
 
@@ -93,6 +95,8 @@ fun AddNewCarScreen(
                     )
                 )
             )
+            .statusBarsPadding()
+            .navigationBarsPadding()
     ) {
         CarlyAppBar(
             title = stringResource(R.string.car_selection),
@@ -110,26 +114,25 @@ fun AddNewCarScreen(
             modifier = Modifier.padding(16.dp),
         )
 
-        HorizontalDivider(color = Color.Gray, thickness = 0.5.dp)
-
+        ListItemDivider()
         LazyColumn {
 
             items(state.filtered, key = { it.hashCode() }) { item ->
                 CarSelectionListItem(item = item,
                     onClick = { onAction(AddCarAction.OnItemSelected(item)) })
-                HorizontalDivider(color = Color.Gray, thickness = 0.5.dp)
+                ListItemDivider()
             }
         }
     }
 }
 
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun CarSelectionScreenPreview() {
     CarlyTheme {
         AddNewCarScreen(
-            state = AddCarState(newCar = UserCar(brand = SelectionItem(1, "BMW"))),
+            state = AddCarState(newCar = CreateUserCar(brand = SelectionItem(1, "BMW"))),
             onAction = {})
     }
 }

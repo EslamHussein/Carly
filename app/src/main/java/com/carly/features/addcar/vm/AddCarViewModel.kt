@@ -78,7 +78,7 @@ class AddCarViewModel(
         }
     }
 
-    private fun addNewCar(newCar: UserCar) = intent {
+    private fun addNewCar(newCar: CreateUserCar) = intent {
 
         addNewCarUseCase(newCar)
             .onSuccess {
@@ -110,7 +110,7 @@ class AddCarViewModel(
         }
     }
 
-    private fun resetNewCar(currentCar: UserCar, previousStep: Step): UserCar {
+    private fun resetNewCar(currentCar: CreateUserCar, previousStep: Step): CreateUserCar {
         return when (previousStep) {
             Step.SelectBrand -> currentCar.copy(
                 brand = null,

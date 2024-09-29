@@ -1,7 +1,7 @@
 package com.carly.features.addcar.rp
 
 import com.carly.features.addcar.vm.SelectionItem
-import com.carly.features.addcar.vm.UserCar
+import com.carly.features.addcar.vm.CreateUserCar
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -36,6 +36,6 @@ interface AddCarRepository {
     /**
      * Get transmission types
      */
-    suspend fun addUserCar(userCar: UserCar):Result<Long>
+    suspend fun addUserCar(createUserCar: CreateUserCar):Result<Long>
 
 }

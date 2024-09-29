@@ -1,10 +1,5 @@
 package com.carly.features.dashboard.vm
 
-import com.carly.core.data.local.entities.UserCarEntity
+import com.carly.features.dashboard.ui.dto.SelectedCarWithFeatures
 
-sealed interface DashboardState {
-    data object Idle : DashboardState
-    data object Loading : DashboardState
-    data object NoCarAvailable : DashboardState
-    data class CarSelected(val car: UserCarEntity) : DashboardState
-}
+data class DashboardState(val selectedCarWithFeatures: SelectedCarWithFeatures? = null)

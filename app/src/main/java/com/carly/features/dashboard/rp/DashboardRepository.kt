@@ -1,6 +1,6 @@
 package com.carly.features.dashboard.rp
 
-import com.carly.core.data.local.entities.UserCarEntity
+import com.carly.features.dashboard.ui.dto.SelectedCarWithFeatures
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,10 +10,7 @@ interface DashboardRepository {
     /**
      * load initial data
      */
-    suspend fun loadInitData()
+    suspend fun loadInitData():Result<Unit>
 
-    /**
-     * Get selected car
-     */
-    suspend fun getSelectedCar(): Flow<UserCarEntity?>
+    fun getSelectedCarWithFeatures(): Flow<SelectedCarWithFeatures?>
 }

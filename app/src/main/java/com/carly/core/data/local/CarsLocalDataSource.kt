@@ -2,6 +2,7 @@ package com.carly.core.data.local
 
 import com.carly.core.data.json.models.Brand
 import com.carly.core.data.json.models.FuelType
+import com.carly.core.data.local.dto.SelectedCarWithFeaturesEntity
 import com.carly.core.data.local.entities.CarBrandEntity
 import com.carly.core.data.local.entities.FuelTypeEntity
 import com.carly.core.data.local.entities.SeriesEntity
@@ -60,5 +61,5 @@ interface CarsLocalDataSource {
     /**
      * Get user car by id
      */
-    suspend fun getUserCarById(carId: Long): UserCarEntity?
+    fun getUserCarByIdWithSupportedFeatures(carId: Long): Flow<SelectedCarWithFeaturesEntity?>
 }

@@ -1,36 +1,47 @@
 package com.carly.features.dashboard.vm
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.carly.core.vm.MviViewModel
 import com.carly.features.dashboard.domain.GetSelectedCarUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.carly.features.dashboard.domain.LoadInitDataUseCase
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class DashboardViewModel(
+    private val loadInitDataUseCase: LoadInitDataUseCase,
     private val getSelectedCarUseCase: GetSelectedCarUseCase
-) : ViewModel() {
-
-    private val _state = MutableStateFlow<DashboardState>(DashboardState.NoCarAvailable)
-    val state = _state.asStateFlow()
+) : MviViewModel<DashboardState, DashboardSideEffect, DashboardAction>(DashboardState()) {
 
     init {
         loadInitData()
     }
 
-    private fun loadInitData() {
-        viewModelScope.launch {
-            _state.value = DashboardState.Loading
-            getSelectedCarUseCase().collectLatest { selectedCar ->
-                if (selectedCar != null) {
-                    _state.value = DashboardState.CarSelected(selectedCar)
+    private fun loadInitData() = intent {
+        loadInitDataUseCase()
+            .onSuccess {
+                sendAction(DashboardAction.LoadSelectedCar)
+            }.onFailure {
+                //postSideEffect(DashboardSideEffect.ShowErro) TODO
+
+            }
+    }
+
+    override fun sendAction(action: DashboardAction) {
+
+        when (action) {
+            DashboardAction.LoadInitData -> loadInitData()
+            DashboardAction.LoadSelectedCar -> collectSelectedCar()
+        }
+
+    }
+
+    private fun collectSelectedCar() = intent {
+        getSelectedCarUseCase()
+            .collectLatest {
+                if (it == null) {
+                    reduce { copy() }
                 } else {
-                    _state.value = DashboardState.NoCarAvailable
+                    reduce { copy(selectedCarWithFeatures = it) }
                 }
             }
-
-        }
     }
 
 }

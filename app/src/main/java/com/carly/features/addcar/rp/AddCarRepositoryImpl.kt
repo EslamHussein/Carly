@@ -5,7 +5,7 @@ import com.carly.core.data.local.CarsLocalDataSource
 import com.carly.core.data.local.entities.UserCarEntity
 import com.carly.core.dispatcher.DispatcherProvider
 import com.carly.features.addcar.vm.SelectionItem
-import com.carly.features.addcar.vm.UserCar
+import com.carly.features.addcar.vm.CreateUserCar
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -49,14 +49,14 @@ class AddCarRepositoryImpl(
             .flowOn(dispatcherProvider.io)
     }
 
-    override suspend fun addUserCar(userCar: UserCar) = withContext(dispatcherProvider.io) {
+    override suspend fun addUserCar(createUserCar: CreateUserCar) = withContext(dispatcherProvider.io) {
         carsLocalDataSource.addUserCar(
             UserCarEntity(
-                brandName = userCar.brand?.name ?: throw IllegalArgumentException("Brand is null"),
-                seriesName = userCar.series?.name
+                brandName = createUserCar.brand?.name ?: throw IllegalArgumentException("Brand is null"),
+                seriesName = createUserCar.series?.name
                     ?: throw IllegalArgumentException("Series is null"),
-                buildYear = userCar.year?.id ?: throw IllegalArgumentException("Year is null"),
-                fuelType = userCar.fuelType?.name
+                buildYear = createUserCar.year?.id ?: throw IllegalArgumentException("Year is null"),
+                fuelType = createUserCar.fuelType?.name
                     ?: throw IllegalArgumentException("Fuel type is null"),
             )
         ).onSuccess {

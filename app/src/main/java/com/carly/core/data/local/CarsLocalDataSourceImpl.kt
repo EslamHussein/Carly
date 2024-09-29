@@ -9,6 +9,7 @@ import com.carly.core.data.local.dao.FeatureDao
 import com.carly.core.data.local.dao.FuelTypeDao
 import com.carly.core.data.local.dao.SeriesDao
 import com.carly.core.data.local.dao.UserCarDao
+import com.carly.core.data.local.dto.SelectedCarWithFeaturesEntity
 import com.carly.core.data.local.entities.CarBrandEntity
 import com.carly.core.data.local.entities.CarBrandFeatureCrossRef
 import com.carly.core.data.local.entities.FuelTypeEntity
@@ -16,6 +17,7 @@ import com.carly.core.data.local.entities.SeriesEntity
 import com.carly.core.data.local.entities.SupportedFeatureEntity
 import com.carly.core.data.local.entities.UserCarEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class CarsLocalDataSourceImpl(
     private val carBrandDao: BrandDao,
@@ -65,7 +67,7 @@ class CarsLocalDataSourceImpl(
             // Insert Cross-Reference
             carBrandWithSeries.supportedFeatures.forEach { feature ->
                 val crossRef = CarBrandFeatureCrossRef(
-                    brandId = carBrandEntity.brandId,
+                    brandName = carBrandEntity.brandName,
                     featureId = feature.featureId
                 )
                 carBrandFeatureCrossRefDao.insertCarBrandFeatureCrossRef(crossRef)
@@ -111,7 +113,7 @@ class CarsLocalDataSourceImpl(
         return userCarDao.getAllCars()
     }
 
-    override suspend fun getUserCarById(carId: Long): UserCarEntity? {
-        return userCarDao.getUserCarById(carId)
+    override fun getUserCarByIdWithSupportedFeatures(carId: Long): Flow<SelectedCarWithFeaturesEntity?> {
+        return userCarDao.getSelectedCarWithFeatures(carId)
     }
 }

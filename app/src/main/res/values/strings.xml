@@ -6,4 +6,5 @@
     <string name="search_for_build_year">Search for build year …</string>
     <string name="search_for_fuel_type">Search for fuel type …</string>
     <string name="car_selection">Car selection</string>
+    <string name="discover_your_car">Discover your car</string>
 </resources>

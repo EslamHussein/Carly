@@ -2,8 +2,8 @@ package com.carly.core.data.local.entities
 
 import androidx.room.Entity
 
-@Entity(primaryKeys = ["brandId", "featureId"])
+@Entity(primaryKeys = ["brandName", "featureId"])
 data class CarBrandFeatureCrossRef(
-    val brandId: Int,
+    val brandName: String,
     val featureId: Int
 )
