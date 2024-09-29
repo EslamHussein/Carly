@@ -11,6 +11,10 @@ features like Diagnostics, Live Data, and Battery Check.
 
 ---
 
+## Demo
+
+https://github.com/user-attachments/assets/4070b7a0-5d7d-4529-a3c0-2e3f608975ff
+
 ## Screenshots
 
 <table>
