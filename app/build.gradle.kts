@@ -70,7 +70,6 @@ dependencies {
 
     testImplementation(libs.bundles.testing)
     testImplementation(libs.bundles.koin.testing)
-    testImplementation(libs.bundles.compose.testing)
 
     androidTestImplementation(libs.bundles.android.testing)
 

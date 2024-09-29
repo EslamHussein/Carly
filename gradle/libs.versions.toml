@@ -18,7 +18,6 @@ room = "2.6.1"
 koin = "3.5.6"
 roomKtx = "2.6.1"
 xlog = "1.11.0"
-coil = "2.6.0"
 kotlin-coroutines = "1.8.1"
 compose-navigation = "2.8.1"
 material-icons = "1.7.2"
@@ -60,12 +59,6 @@ koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", versi
 #Xlog
 xlog = { group = "com.elvishew", name = "xlog", version.ref = "xlog" }
 
-#Coil
-coil-core = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
-coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
-coil-svg = { group = "io.coil-kt", name = "coil-svg", version.ref = "coil" }
-coil-test = { group = "io.coil-kt", name = "coil-test", version.ref = "coil" }
-
 #Coroutines
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
@@ -88,16 +81,10 @@ core = ['androidx-core-ktx', 'coroutines-core', 'coroutines-android', 'androidx-
 compose = [
     'androidx-activity-compose',
     'koin-compose',
-    'coil-core',
-    'coil-compose',
-    'coil-svg',
     'androidx-material3',
     'androidx-compose-navigation',
     'androidx-compose-material-icons',
     'androidx-constraintlayout-compose',
-]
-compose-testing = [
-    'coil-test'
 ]
 
 ui = [
