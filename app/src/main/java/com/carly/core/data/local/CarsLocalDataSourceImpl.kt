@@ -1,6 +1,7 @@
 package com.carly.core.data.local
 
 import com.carly.core.asFailure
+import com.carly.core.data.CarAlreadyExistsException
 import com.carly.core.data.json.models.Brand
 import com.carly.core.data.json.models.FuelType
 import com.carly.core.data.local.dao.BrandDao
@@ -102,6 +103,15 @@ class CarsLocalDataSourceImpl(
 
     override suspend fun addUserCar(car: UserCarEntity): Result<Long> {
         return runCatching {
+            if (userCarDao.checkIfCarExists(
+                    car.brandName,
+                    car.seriesName,
+                    car.buildYear,
+                    car.fuelType
+                )
+            ) {
+                throw CarAlreadyExistsException()
+            }
             userCarDao.insertCar(car)
         }.onFailure {
             it.asFailure<Throwable>()

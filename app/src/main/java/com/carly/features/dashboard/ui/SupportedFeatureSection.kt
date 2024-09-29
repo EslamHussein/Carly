@@ -54,7 +54,6 @@ fun SupportedFeatureSection(
                 .fillMaxWidth(),
             shape = RoundedCornerShape(12.dp)
         ) {
-
             Box(
                 modifier = Modifier.background(
                     brush = Brush.linearGradient(
@@ -94,7 +93,8 @@ fun FeatureListItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable { onFeatureClick(feature) }
-            .padding(horizontal = 16.dp, vertical = 12.dp),
+            .padding(start = 12.dp, end = 4.dp)
+            .padding(vertical = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -103,7 +103,7 @@ fun FeatureListItem(
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onPrimary
         )
-        ListNextIcon(Modifier.padding(8.dp))
+        ListNextIcon()
     }
 }
 

@@ -85,7 +85,7 @@ class AddCarViewModel(
             .onSuccess {
                 postSideEffect(AddCarSideEffect.NativeToHome)
             }.onFailure {
-                postSideEffect(AddCarSideEffect.ShowError)
+                postSideEffect(AddCarSideEffect.ShowError(it))
             }
     }
 
@@ -157,7 +157,7 @@ class AddCarViewModel(
                     year = state.value.newCar.year
                 )
             ).catch {
-                postSideEffect(AddCarSideEffect.ShowError)
+                postSideEffect(AddCarSideEffect.ShowError(it))
             }.collectLatest {
                 reduce {
                     copy(

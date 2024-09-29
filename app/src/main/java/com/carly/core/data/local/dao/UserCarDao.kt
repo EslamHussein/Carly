@@ -29,5 +29,19 @@ interface UserCarDao {
     )
     fun getSelectedCarWithFeatures(carId: Long): Flow<SelectedCarWithFeaturesEntity?>
 
-
+    @Query("""
+        SELECT EXISTS(
+            SELECT 1 FROM user_car 
+            WHERE brandName = :brandName 
+              AND seriesName = :seriesName
+              AND buildYear = :buildYear
+              AND fuelType = :fuelType
+        )
+    """)
+    suspend fun checkIfCarExists(
+        brandName: String,
+        seriesName: String,
+        buildYear: Int,
+        fuelType: String
+    ): Boolean
 }

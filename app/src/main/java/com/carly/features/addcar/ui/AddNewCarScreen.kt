@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.carly.R
+import com.carly.core.ext.getErrorResourceId
 import com.carly.core.ui.GradientScreenBackground
 import com.carly.core.ui.ListItemDivider
 import com.carly.features.addcar.ui.appbar.CarlyAppBar
@@ -32,7 +33,6 @@ import com.carly.features.addcar.vm.AddCarState
 import com.carly.features.addcar.vm.AddCarViewModel
 import com.carly.features.addcar.vm.CreateUserCar
 import com.carly.features.addcar.vm.SelectionItem
-import com.carly.features.addcar.vm.Step
 import com.carly.features.addcar.vm.getSearchHint
 import com.carly.features.navigation.DashboardDestination
 import com.carly.ui.theme.CarlyTheme
@@ -65,11 +65,13 @@ fun AddNewCarScreen(
                     }
                 }
 
-                AddCarSideEffect.ShowError -> {
+                is AddCarSideEffect.ShowError -> {
+
 
                     Toast.makeText(
                         context,
-                        context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
+                        context.getString(sideEffect.throwable.getErrorResourceId()),
+                        Toast.LENGTH_SHORT
                     ).show()
                 }
 
@@ -87,7 +89,6 @@ fun AddNewCarScreen(
         }
     )
 }
-
 
 @Composable
 fun AddNewCarScreen(

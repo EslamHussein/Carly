@@ -10,5 +10,6 @@
     <string name="add_new_car">Add new car</string>
     <string name="your_cars">Your cars</string>
     <string name="ops_something_went_wong">Ops… Something went wong!</string>
+    <string name="car_already_exists">Car is already exist please select another car.</string>
 
 </resources>
