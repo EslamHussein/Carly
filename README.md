@@ -105,4 +105,14 @@ database entities and data sources, as these are used in multiple parts of the a
 
 
 
-## Setup Instructions
+## Build Instructions
+
+### Local Build
+
+To build the APK locally, ensure you are using **Android Studio Koala Feature Drop | 2024.1.2 Patch 1** or later:
+1. Open the project in [Android Studio](https://developer.android.com/studio).
+2. Sync Gradle and use `Build > Build APK`.
+
+### GitHub Actions Build
+
+You can download the APK from the **Actions** tab under the **Artifacts** section after a workflow run.
