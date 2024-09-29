@@ -7,6 +7,7 @@ import com.carly.core.di.jsonModule
 import com.carly.core.di.localDBModule
 import com.carly.features.addcar.di.addCarModule
 import com.carly.features.dashboard.di.dashboardModule
+import com.carly.features.mycars.di.myCarsModule
 import com.elvishew.xlog.LogConfiguration
 import com.elvishew.xlog.LogItem
 import com.elvishew.xlog.LogLevel
@@ -30,7 +31,8 @@ class CarlyApp : Application() {
                 localDBModule,
                 dashboardModule,
                 addCarModule,
-                dataStoreModule
+                dataStoreModule,
+                myCarsModule
             )
         }
     }

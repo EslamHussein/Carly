@@ -3,12 +3,9 @@ package com.carly.features.dashboard.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -28,9 +25,11 @@ import com.carly.features.dashboard.ui.dto.SelectedCarWithFeatures
 import com.carly.features.dashboard.ui.dto.SupportedFeature
 import com.carly.features.dashboard.ui.dto.UserCar
 import com.carly.features.dashboard.vm.DashboardAction
+import com.carly.features.dashboard.vm.DashboardSideEffect
 import com.carly.features.dashboard.vm.DashboardState
 import com.carly.features.dashboard.vm.DashboardViewModel
-import com.carly.features.navigation.CarSelectionDestination
+import com.carly.features.navigation.AddNewCarDestination
+import com.carly.features.navigation.MyCarsDestination
 import com.carly.ui.theme.CarlyTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -41,11 +40,27 @@ fun DashboardScreen(
     viewModel: DashboardViewModel = koinViewModel()
 ) {
     LaunchedEffect(Unit) { viewModel.sendAction(DashboardAction.LoadInitData) }
+
+
+    LaunchedEffect(Unit) {
+
+        viewModel.sideEffect.collect { sideEffect ->
+            when (sideEffect) {
+                DashboardSideEffect.NavigateToAddNewCar ->
+                    navController.navigate(AddNewCarDestination)
+
+                DashboardSideEffect.NavigateToCarList -> navController.navigate(MyCarsDestination)
+                DashboardSideEffect.ShowError -> TODO()
+            }
+        }
+
+
+    }
     DashboardScreen(
         modifier = modifier
-            .systemBarsPadding(),
+            .background(MaterialTheme.colorScheme.onSecondary),
         state = viewModel.state.collectAsStateWithLifecycle().value,
-        onAddCarCLick = { navController.navigate(CarSelectionDestination) }
+        onAction = { viewModel.sendAction(action = it) }
     )
 }
 
@@ -54,7 +69,7 @@ fun DashboardScreen(
 private fun DashboardScreen(
     modifier: Modifier = Modifier,
     state: DashboardState,
-    onAddCarCLick: () -> Unit
+    onAction: (action: DashboardAction) -> Unit
 ) {
 
     ConstraintLayout(
@@ -91,7 +106,7 @@ private fun DashboardScreen(
                     height = Dimension.fillToConstraints
                 },
                 car = state.selectedCarWithFeatures.car,
-                onMenuClick = { /*TODO*/ }
+                onMenuClick = { onAction(DashboardAction.OnMenuClicked) }
             )
         }
 
@@ -106,8 +121,12 @@ private fun DashboardScreen(
             contentDescription = "car image",
             modifier = Modifier
                 .then(
-                    if (state.selectedCarWithFeatures == null) Modifier.clickable { onAddCarCLick() }
-                    else Modifier
+                    if (state.selectedCarWithFeatures == null) {
+                        Modifier
+                            .clickable { onAction(DashboardAction.OnAddNewCarClicked) }
+                    } else {
+                        Modifier
+                    }
                 )
                 .size(150.dp)
                 .constrainAs(centerImage) {

@@ -3,6 +3,7 @@ package com.carly.features.addcar.vm
 import com.carly.core.vm.MviViewModel
 import com.carly.features.addcar.domain.AddNewCarUseCase
 import com.carly.features.addcar.domain.FetchStepDataUseCaseUseCase
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 
 /**
@@ -155,7 +156,9 @@ class AddCarViewModel(
                     series = state.value.newCar.series,
                     year = state.value.newCar.year
                 )
-            ).collectLatest {
+            ).catch {
+                postSideEffect(AddCarSideEffect.ShowError)
+            }.collectLatest {
                 reduce {
                     copy(
                         currentStepList = it,

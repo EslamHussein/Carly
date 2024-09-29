@@ -17,9 +17,8 @@ interface UserCarDao {
     @Query("SELECT * FROM user_car")
     fun getAllCars(): Flow<List<UserCarEntity>>
 
-    @Query("SELECT * FROM user_car WHERE id = :carId")
-    suspend fun getUserCarById(carId: Long): UserCarEntity?
-
+    @Query("DELETE FROM user_car WHERE id = :carId")
+    suspend fun deleteCarById(carId: Long)
 
     @Transaction
     @Query(

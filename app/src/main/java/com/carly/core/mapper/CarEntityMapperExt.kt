@@ -6,6 +6,7 @@ import com.carly.core.data.local.entities.UserCarEntity
 import com.carly.features.dashboard.ui.dto.SelectedCarWithFeatures
 import com.carly.features.dashboard.ui.dto.SupportedFeature
 import com.carly.features.dashboard.ui.dto.UserCar
+import com.carly.features.mycars.ui.dto.MyCar
 
 fun UserCarEntity.toUserCar(): UserCar {
     return UserCar(
@@ -32,4 +33,15 @@ fun SelectedCarWithFeaturesEntity.toSelectedCarWithFeatures(): SelectedCarWithFe
             features = entity.features.map { it.toSupportedFeature() }
         )
     }
+}
+
+
+fun UserCarEntity.toMyCar(): MyCar {
+    return MyCar(
+        id = id,
+        brandName = brandName,
+        seriesName = seriesName,
+        buildYear = buildYear,
+        fuelType = fuelType
+    )
 }

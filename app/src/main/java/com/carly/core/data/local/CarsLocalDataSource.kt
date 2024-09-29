@@ -62,4 +62,9 @@ interface CarsLocalDataSource {
      * Get user car by id
      */
     fun getUserCarByIdWithSupportedFeatures(carId: Long): Flow<SelectedCarWithFeaturesEntity?>
+
+    /**
+     * Delete user car by id
+     */
+    suspend fun deleteUserCarById(carId: Long): Result<Unit>
 }

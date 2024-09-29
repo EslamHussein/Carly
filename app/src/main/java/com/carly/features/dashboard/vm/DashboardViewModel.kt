@@ -19,8 +19,7 @@ class DashboardViewModel(
             .onSuccess {
                 sendAction(DashboardAction.LoadSelectedCar)
             }.onFailure {
-                //postSideEffect(DashboardSideEffect.ShowErro) TODO
-
+                postSideEffect(DashboardSideEffect.ShowError)
             }
     }
 
@@ -29,6 +28,8 @@ class DashboardViewModel(
         when (action) {
             DashboardAction.LoadInitData -> loadInitData()
             DashboardAction.LoadSelectedCar -> collectSelectedCar()
+            DashboardAction.OnAddNewCarClicked -> intent { postSideEffect(DashboardSideEffect.NavigateToAddNewCar) }
+            DashboardAction.OnMenuClicked -> intent { postSideEffect(DashboardSideEffect.NavigateToCarList) }
         }
 
     }
@@ -36,9 +37,7 @@ class DashboardViewModel(
     private fun collectSelectedCar() = intent {
         getSelectedCarUseCase()
             .collectLatest {
-                if (it == null) {
-                    reduce { copy() }
-                } else {
+                if (it != null) {
                     reduce { copy(selectedCarWithFeatures = it) }
                 }
             }

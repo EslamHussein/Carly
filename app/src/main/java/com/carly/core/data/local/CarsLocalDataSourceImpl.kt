@@ -17,7 +17,6 @@ import com.carly.core.data.local.entities.SeriesEntity
 import com.carly.core.data.local.entities.SupportedFeatureEntity
 import com.carly.core.data.local.entities.UserCarEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class CarsLocalDataSourceImpl(
     private val carBrandDao: BrandDao,
@@ -115,5 +114,9 @@ class CarsLocalDataSourceImpl(
 
     override fun getUserCarByIdWithSupportedFeatures(carId: Long): Flow<SelectedCarWithFeaturesEntity?> {
         return userCarDao.getSelectedCarWithFeatures(carId)
+    }
+
+    override suspend fun deleteUserCarById(carId: Long): Result<Unit> {
+        return runCatching { userCarDao.deleteCarById(carId) }.onFailure { it.asFailure<Throwable>() }
     }
 }

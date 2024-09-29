@@ -1,5 +1,6 @@
 package com.carly.features.addcar.ui
 
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,14 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.carly.R
+import com.carly.core.ui.GradientScreenBackground
 import com.carly.core.ui.ListItemDivider
 import com.carly.features.addcar.ui.appbar.CarlyAppBar
 import com.carly.features.addcar.ui.appbar.SearchBar
@@ -48,6 +49,7 @@ fun AddNewCarScreen(
 
     val sideEffect = viewModel.sideEffect.collectAsState(null).value // Observe side effects
 
+    val context = LocalContext.current
     LaunchedEffect(sideEffect) {
         when (sideEffect) {
             AddCarSideEffect.NavigateBack -> {
@@ -64,7 +66,11 @@ fun AddNewCarScreen(
             }
 
             AddCarSideEffect.ShowError -> {
-                // TODO show error msg
+
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.ops_something_went_wong), Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -82,18 +88,15 @@ fun AddNewCarScreen(
 
 @Composable
 fun AddNewCarScreen(
-    modifier: Modifier = Modifier, state: AddCarState, onAction: (AddCarAction) -> Unit
+    modifier: Modifier = Modifier,
+    state: AddCarState,
+    onAction: (AddCarAction) -> Unit
 ) {
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xff3a3f49), // Start color (top)
-                        Color(0xFF25272d)  // End color (bottom)
-                    )
-                )
+                brush = GradientScreenBackground()
             )
             .statusBarsPadding()
             .navigationBarsPadding()

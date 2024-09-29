@@ -7,4 +7,8 @@
     <string name="search_for_fuel_type">Search for fuel type …</string>
     <string name="car_selection">Car selection</string>
     <string name="discover_your_car">Discover your car</string>
+    <string name="add_new_car">Add new car</string>
+    <string name="your_cars">Your cars</string>
+    <string name="ops_something_went_wong">Ops… Something went wong!</string>
+
 </resources>
