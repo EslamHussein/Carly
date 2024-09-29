@@ -67,6 +67,8 @@ features like Diagnostics, Live Data, and Battery Check.
 ## Project Architecture
 
 - **MVI**: The MVI (Model-View-Intent) with Clean architecture.
+- ![alt text](/screenshots/MVI_Digram.jpeg)
+
 
 ---
 
