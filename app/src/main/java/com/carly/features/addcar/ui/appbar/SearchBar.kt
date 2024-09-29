@@ -9,9 +9,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,7 +27,7 @@ fun SearchBar(
     placeholderText: String = stringResource(R.string.search_for_brand),
     onSearchQueryChanged: (String) -> Unit
 ) {
-
+    val roundedCornerShape = remember { RoundedCornerShape(4.dp) }
     OutlinedTextField(
         value = searchQuery,
         onValueChange = {
@@ -48,21 +48,18 @@ fun SearchBar(
             )
         },
         colors = AppTextInputColors.copy(
-            focusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            unfocusedContainerColor = MaterialTheme.colorScheme.onPrimaryContainer
+            focusedContainerColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            unfocusedContainerColor = MaterialTheme.colorScheme.onSecondaryContainer
         ),
         modifier = modifier
             .innerShadow(
-                offsetY = 4.dp,
-                offsetX = 4.dp,
-                blur = 16.dp,
-                spread = 9.dp,
-                shape = RoundedCornerShape(4.dp),
-                color = Color.Black
+                blur = 8.dp,
+                spread = 4.dp,
+                shape = roundedCornerShape
             )
             .fillMaxWidth()
-            .clip(RoundedCornerShape(4.dp)),
-        shape = RoundedCornerShape(4.dp),
+            .clip(roundedCornerShape),
+        shape = roundedCornerShape,
         singleLine = true
     )
 }

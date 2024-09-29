@@ -103,7 +103,7 @@ fun FeatureListItem(
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onPrimary
         )
-        ListNextIcon()
+        ListNextIcon(Modifier.padding(8.dp))
     }
 }
 
